@@ -64,8 +64,9 @@ public class ScrollingInk : MonoBehaviour
                 StartStory();
             });
         }
+        UIX.UpdateLayout(rootCanvas.transform);
         float height = scrollRect.content.rect.height;
-        float num_to_show = 100.0f;
+        float num_to_show = 400.0f;
         if (num_to_show < height)
         {
             float down = height - num_to_show;
@@ -131,6 +132,8 @@ public class ScrollingInk : MonoBehaviour
 
     [SerializeField]
     private GameObject canvas;
+    [SerializeField]
+    private GameObject rootCanvas;
 
     // UI Prefabs
     [SerializeField]
@@ -143,3 +146,47 @@ public class ScrollingInk : MonoBehaviour
 
     private List<Button> added_buttons = new List<Button>();
 }
+
+     
+public static class UIX
+{
+    /// <summary>
+    /// Forces the layout of a UI GameObject and all of it's children to update
+    /// their positions and sizes.
+    /// </summary>
+    /// <param name="xform">
+    /// The parent transform of the UI GameObject to update the layout of.
+    /// </param>
+    public static void UpdateLayout(Transform xform)
+    {
+        Canvas.ForceUpdateCanvases();
+        UpdateLayout_Internal(xform);
+    }
+
+    private static void UpdateLayout_Internal(Transform xform)
+    {
+        if (xform == null || xform.Equals(null))
+        {
+            return;
+        }
+
+        // Update children first
+        for (int x = 0; x < xform.childCount; ++x)
+        {
+            UpdateLayout_Internal(xform.GetChild(x));
+        }
+
+        // Update any components that might resize UI elements
+        foreach (var layout in xform.GetComponents<LayoutGroup>())
+        {
+            layout.CalculateLayoutInputVertical();
+            layout.CalculateLayoutInputHorizontal();
+        }
+        foreach (var fitter in xform.GetComponents<ContentSizeFitter>())
+        {
+            fitter.SetLayoutVertical();
+            fitter.SetLayoutHorizontal();
+        }
+    }
+}
+

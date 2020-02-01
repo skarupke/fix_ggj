@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJSONAsset: {fileID: 4900000, guid: 37e4147d96ac8ee4db5a115580988d77, type: 3}
   canvas: {fileID: 423582735}
+  rootCanvas: {fileID: 1541844400}
   textPrefab: {fileID: 1800671004}
   buttonPrefab: {fileID: 1775322564}
   scrollRect: {fileID: 1862177783}
