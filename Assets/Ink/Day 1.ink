@@ -28,12 +28,12 @@ D: "Ouch... you gotta practice that more, kid."
   Don't worry, you'll get it right someday!
   Just like I'll get your mom...
   ...whoa, chill out! I mean I'll get your mom the game machine thingy
-    + Why...are you getting my mom a game machine? -> present
+    + You're getting my mom what? -> present
 
 -> done
 
 == present ==
-D: "You tell me, kid! I don't know anything about nerd things.
+D: "You tell me! I don't know anything about nerd things.
 She said something about surprising your daddy.
 I guess it's chubby hubby's birthday tomorrow?
 Whoops, don't tell her I told you, k?
