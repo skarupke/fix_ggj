@@ -115,11 +115,25 @@ public class ScrollingInk : MonoBehaviour
         }
         UIX.UpdateLayout(rootCanvas.transform);
         float height = scrollRect.content.rect.height;
-        float num_to_show = 400.0f;
+        float num_to_show = 300.0f;
         if (num_to_show < height)
         {
             float down = height - num_to_show;
-            scrollRect.verticalNormalizedPosition = 1.0f - (down / height);
+
+            old_scroll_position = scrollRect.verticalNormalizedPosition;
+            new_scroll_position = 1.0f - (down / height);
+            num_scroll_steps = 60;
+            //scrollRect.verticalNormalizedPosition = 1.0f - (down / height);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (old_scroll_position != new_scroll_position && num_scroll_steps > 0)
+        {
+            old_scroll_position = 0.875f * old_scroll_position + 0.125f * new_scroll_position;
+            scrollRect.verticalNormalizedPosition = old_scroll_position;
+            --num_scroll_steps;
         }
     }
 
@@ -134,7 +148,7 @@ public class ScrollingInk : MonoBehaviour
     void AppendLine()
     {
         if (textPrefab.text.Length > 1)
-            textPrefab.text += "\n---------------\n";
+            textPrefab.text += "\n___________________________________\n";
     }
 
     void AppendText(string text)
@@ -200,6 +214,10 @@ public class ScrollingInk : MonoBehaviour
     private ScrollRect scrollRect;
 
     private List<Button> added_buttons = new List<Button>();
+
+    private float old_scroll_position = 0.0f;
+    private float new_scroll_position = 0.0f;
+    int num_scroll_steps = 0;
 }
 
      
