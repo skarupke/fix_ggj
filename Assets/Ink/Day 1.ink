@@ -32,7 +32,7 @@ D: "Hey kiddo, nice skateboard shoes! Show me a kick flip!" #hopeful
 
 == lie ==
 "You need to watch what you say, kid. Get outta here." # furious
--> Map
++ [map] --> Map
 
 == sneak_around ==
 "You mean our early-morning meetups? That's just, well, can you keep a secret?" # worried
@@ -41,7 +41,7 @@ D: "Hey kiddo, nice skateboard shoes! Show me a kick flip!" #hopeful
 
 == going_on ==
 "Your mom and I have been meeting up all this week to plan your dad's birthday surprise party -- we've got guests coming in, and I gotta drive this UHAUL all the way to Jersey City to pick up the centerpiece! Wait till your dad sees his big gift!" # happy
--> Map
++ [map] --> Map
 
 
 == flip ==
@@ -61,7 +61,7 @@ D: "It's a vintage arcade machine! We've been planning in secret for weeks." # h
   
 == fiver ==
 "Does your mother know she raised a con artist? Get outta here." # furious
--> Map
++ [map] --> Map
 
 
 
@@ -111,7 +111,7 @@ D: "I just...I can't stop thinking about it." # furious
 == off ==
 "No...oh no...this isn't happening." # crying
 "I'm sorry, son. I think I need some space." 
--> Map
++ [map] -> Map
 
 == wait ==
 Mom was getting you a birthday gift! 
@@ -124,7 +124,7 @@ Mom was getting you a birthday gift!
 == too_late ==
 Sigh. # crying
 "I don't know, son. I think I need some space."
--> Map
++ [map] -> Map
 
 
 
@@ -149,11 +149,11 @@ Sigh. # crying
 
 == what_surprise ==
 "Just wait till you see! It's big, it's rare, your dad's gonna love it. My my, sometimes I'm such a good gifter I impress myself." # happy
--> Map
++ [map] -> Map
 
 == skateboard ==
 "Honey...no one will like you if you talk that way. Anyways, it's not your birthday. Now run along... " # plain
--> Map
++ [map] -> Map
 
 == sneak ==
 "Oh honey, you've got it all wrong. It's not that."
@@ -186,8 +186,8 @@ Oh, I had to sell his favorite original First Edition Mrs Pac Man to pay for it.
 + [...] -> Map
 
 == thoughtful ==
-"I know, honey. Sometimes I impress myself." # happuy 
--> Map
+"I know, honey. Sometimes I impress myself." # happy 
++ [map] -> Map
 
 == affair ==
 "HA! Me, an affair? A woman my age, honey you flatter me." # happy
@@ -198,6 +198,7 @@ Oh, I had to sell his favorite original First Edition Mrs Pac Man to pay for it.
 "HA! Your dad's such a sensitive soul. All these crazy ideas. Let me go talk to him, it'll clear it all up. Now you go change into your birthday suit." # happy
 + [That's not what that word means, Mom.] -> END
 + [...you're welcome for saving this family, everyone.] -> END
+
 
 
 
