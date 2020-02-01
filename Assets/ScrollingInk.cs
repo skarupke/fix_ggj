@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System;
 using Ink.Runtime;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class ScrollingInk : MonoBehaviour
@@ -49,11 +50,58 @@ public class ScrollingInk : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 Choice choice = story.currentChoices[i];
-                Button button = CreateChoiceView(choice.text.Trim());
-                // Tell the button what to do when we press it
-                button.onClick.AddListener(delegate {
+                string text = choice.text.Trim();
+
+                UnityAction action = delegate
+                {
+                    if (DeakAction != null)
+                    {
+                        DeakButton.onClick.RemoveListener(DeakAction);
+                        DeakAction = null;
+                    }
+                    if (DadAction != null)
+                    {
+                        DadButton.onClick.RemoveListener(DadAction);
+                        DadAction = null;
+                    }
+                    if (MomAction != null)
+                    {
+                        MomButton.onClick.RemoveListener(MomAction);
+                        MomAction = null;
+                    }
+                    DadButton.gameObject.SetActive(false);
+                    DeakButton.gameObject.SetActive(false);
+                    MomButton.gameObject.SetActive(false);
+                    map.SetActive(false);
                     OnClickChoiceButton(choice);
-                });
+                };
+
+                Button button = null;
+                if (text == "Deak" || text == "Deak the Neighbor")
+                {
+                    DeakAction = action;
+                    button = DeakButton;
+                    DeakButton.gameObject.SetActive(true);
+                    map.SetActive(true);
+                }
+                else if (text == "Dad")
+                {
+                    DadAction = action;
+                    button = DadButton;
+                    DadButton.gameObject.SetActive(true);
+                    map.SetActive(true);
+                }
+                else if (text == "Mom")
+                {
+                    MomAction = action;
+                    button = MomButton;
+                    MomButton.gameObject.SetActive(true);
+                    map.SetActive(true);
+                }
+                else
+                    button = CreateChoiceView(text);
+                // Tell the button what to do when we press it
+                button.onClick.AddListener(action);
             }
         }
         // If we've read all the content and there's no choices, the story is finished!
@@ -61,6 +109,7 @@ public class ScrollingInk : MonoBehaviour
         {
             Button choice = CreateChoiceView("End of story.\nRestart?");
             choice.onClick.AddListener(delegate {
+                textPrefab.text = "";
                 StartStory();
             });
         }
@@ -84,7 +133,8 @@ public class ScrollingInk : MonoBehaviour
 
     void AppendLine()
     {
-        textPrefab.text += "\n---------------\n";
+        if (textPrefab.text.Length > 1)
+            textPrefab.text += "\n---------------\n";
     }
 
     void AppendText(string text)
@@ -102,14 +152,6 @@ public class ScrollingInk : MonoBehaviour
         // Gets the text from the button prefab
         Text choiceText = choice.GetComponentInChildren<Text>();
         choiceText.text = text;
-
-        // Make the button expand to fit the text
-        /*VerticalLayoutGroup layoutGroup = canvas.GetComponent<VerticalLayoutGroup>();
-        if (layoutGroup)
-        {
-            layoutGroup.childForceExpandHeight = false;
-            layoutGroup.childForceExpandHeight = true;
-        }*/
 
         added_buttons.Add(choice);
 
@@ -140,6 +182,19 @@ public class ScrollingInk : MonoBehaviour
     private Text textPrefab;
     [SerializeField]
     private Button buttonPrefab;
+
+    [SerializeField]
+    private Button DadButton;
+    UnityAction DadAction;
+    [SerializeField]
+    private Button DeakButton;
+    UnityAction DeakAction;
+    [SerializeField]
+    private Button MomButton;
+    UnityAction MomAction;
+
+    [SerializeField]
+    private GameObject map;
 
     [SerializeField]
     private ScrollRect scrollRect;
