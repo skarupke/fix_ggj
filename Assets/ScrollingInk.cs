@@ -109,6 +109,7 @@ public class ScrollingInk : MonoBehaviour
         {
             Button choice = CreateChoiceView("End of story.\nRestart?");
             choice.onClick.AddListener(delegate {
+                textPrefab.text = "";
                 StartStory();
             });
         }
