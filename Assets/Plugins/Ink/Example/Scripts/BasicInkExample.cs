@@ -15,7 +15,7 @@ public class BasicInkExample : MonoBehaviour {
 
 	// Creates a new Story object with the compiled story which we can then play!
 	void StartStory () {
-		story = new Story (inkJSONAsset.text);
+		story = new Story(inkJSONAsset.text);
         if(OnCreateStory != null) OnCreateStory(story);
 		RefreshView();
 	}
@@ -25,12 +25,12 @@ public class BasicInkExample : MonoBehaviour {
 	// Continues over all the lines of text, then displays all the choices. If there are no choices, the story is finished!
 	void RefreshView () {
 		// Remove all the UI on screen
-		RemoveChildren ();
+		RemoveChildren();
 		
 		// Read all the content until we can't continue any more
 		while (story.canContinue) {
 			// Continue gets the next line of the story
-			string text = story.Continue ();
+			string text = story.Continue();
 			// This removes any white space from the text.
 			text = text.Trim();
 			// Display the text on screen!
@@ -40,11 +40,11 @@ public class BasicInkExample : MonoBehaviour {
 		// Display all the choices, if there are any!
 		if(story.currentChoices.Count > 0) {
 			for (int i = 0; i < story.currentChoices.Count; i++) {
-				Choice choice = story.currentChoices [i];
-				Button button = CreateChoiceView (choice.text.Trim ());
+				Choice choice = story.currentChoices[i];
+				Button button = CreateChoiceView(choice.text.Trim());
 				// Tell the button what to do when we press it
-				button.onClick.AddListener (delegate {
-					OnClickChoiceButton (choice);
+				button.onClick.AddListener(delegate {
+					OnClickChoiceButton(choice);
 				});
 			}
 		}
@@ -58,40 +58,41 @@ public class BasicInkExample : MonoBehaviour {
 	}
 
 	// When we click the choice button, tell the story to choose that choice!
-	void OnClickChoiceButton (Choice choice) {
-		story.ChooseChoiceIndex (choice.index);
+	void OnClickChoiceButton(Choice choice) {
+		story.ChooseChoiceIndex(choice.index);
 		RefreshView();
 	}
 
 	// Creates a textbox showing the the line of text
-	void CreateContentView (string text) {
-		Text storyText = Instantiate (textPrefab) as Text;
+	void CreateContentView(string text) {
+		Text storyText = Instantiate(textPrefab) as Text;
 		storyText.text = text;
-		storyText.transform.SetParent (canvas.transform, false);
+		storyText.transform.SetParent(canvas.transform, false);
 	}
 
 	// Creates a button showing the choice text
-	Button CreateChoiceView (string text) {
+	Button CreateChoiceView(string text) {
 		// Creates the button from a prefab
-		Button choice = Instantiate (buttonPrefab) as Button;
-		choice.transform.SetParent (canvas.transform, false);
+		Button choice = Instantiate(buttonPrefab) as Button;
+		choice.transform.SetParent(canvas.transform, false);
 		
 		// Gets the text from the button prefab
-		Text choiceText = choice.GetComponentInChildren<Text> ();
+		Text choiceText = choice.GetComponentInChildren<Text>();
 		choiceText.text = text;
 
 		// Make the button expand to fit the text
-		HorizontalLayoutGroup layoutGroup = choice.GetComponent <HorizontalLayoutGroup> ();
-		layoutGroup.childForceExpandHeight = false;
+		HorizontalLayoutGroup layoutGroup = choice.GetComponent<HorizontalLayoutGroup>();
+        if (layoutGroup)
+            layoutGroup.childForceExpandHeight = false;
 
 		return choice;
 	}
 
 	// Destroys all the children of this gameobject (all the UI)
-	void RemoveChildren () {
+	void RemoveChildren() {
 		int childCount = canvas.transform.childCount;
 		for (int i = childCount - 1; i >= 0; --i) {
-			GameObject.Destroy (canvas.transform.GetChild (i).gameObject);
+			GameObject.Destroy(canvas.transform.GetChild(i).gameObject);
 		}
 	}
 
