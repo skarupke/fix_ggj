@@ -77,7 +77,7 @@ public class ScrollingInk : MonoBehaviour
                 };
 
                 Button button = null;
-                if (text == "Deak")
+                if (text == "Deak" || text == "Deak the Neighbor")
                 {
                     DeakAction = action;
                     button = DeakButton;
