@@ -77,7 +77,7 @@ public class ScrollingInk : MonoBehaviour
                 };
 
                 Button button = null;
-                if (text == "Deak")
+                if (text == "Deak" || text == "Deak the Neighbor")
                 {
                     DeakAction = action;
                     button = DeakButton;
@@ -109,6 +109,7 @@ public class ScrollingInk : MonoBehaviour
         {
             Button choice = CreateChoiceView("End of story.\nRestart?");
             choice.onClick.AddListener(delegate {
+                textPrefab.text = "";
                 StartStory();
             });
         }
