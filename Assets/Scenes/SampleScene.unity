@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 627543445}
   - component: {fileID: 627543444}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Ink Example
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e957d58a4584a8894329531ec0b096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSONAsset: {fileID: 4900000, guid: 32e84db1af7b9f24a85a50bad8435ade, type: 3}
+  inkJSONAsset: {fileID: 4900000, guid: 37e4147d96ac8ee4db5a115580988d77, type: 3}
   canvas: {fileID: 1541844404}
   textPrefab: {fileID: 1800671004}
   buttonPrefab: {fileID: 1755268641}
