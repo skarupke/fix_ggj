@@ -9,7 +9,7 @@ VAR dad_score = 0
 -> Mom
 * [Dad] # dad
 -> Dad
-* {Map == 3} -> done
+* {Map >= 3} -> done
 
 
 
@@ -22,7 +22,7 @@ VAR dad_score = 0
 D: "Hey kiddo, nice skateboard shoes! Show me a kick flip!" # deak_hopeful
 
 +  [Attempt a flip] -> flip
-+  [Ignore] -> Map
++  [Ignore] -> back_to_map
 + {crying == 1} [Piece of shit, are you messing around with my mom?] -> sleep
 
 == sleep ==
@@ -32,7 +32,7 @@ D: "Hey kiddo, nice skateboard shoes! Show me a kick flip!" # deak_hopeful
 
 == lie ==
 "You need to watch what you say, kid. Get outta here." # deak_furious
-+ [map] --> Map
+-> back_to_map
 
 == sneak_around ==
 "You mean our early-morning meetups? That's just, well, can you keep a secret?" # deak_worried
@@ -41,7 +41,7 @@ D: "Hey kiddo, nice skateboard shoes! Show me a kick flip!" # deak_hopeful
 
 == going_on ==
 "Your mom and I have been meeting up all this week to plan your dad's birthday surprise party -- we've got guests coming in, and I gotta drive this UHAUL all the way to Jersey City to pick up the centerpiece! Wait till your dad sees his big gift!" # deak_happy
-+ [map] --> Map
+-> back_to_map
 
 
 == flip ==
@@ -56,12 +56,12 @@ D: "Oof... needs some practice, kid."
 D: "It's a vintage arcade machine! We've been planning in secret for weeks." # deak_happy
 "And today's finally the day! I'm driving my truck over to pick it up right now."
 "Anyways, don't tell her I told you, k?"
-  + ["My lips are sealed."] -> Map
+  + ["My lips are sealed."] -> back_to_map
   + ["Yeah, if you give me 5 bucks."] -> fiver
 
 == fiver ==
 "Does your mother know she raised a con artist? Get outta here." # deak_furious
-+ [map] --> Map
+-> back_to_map
 
 
 
@@ -111,7 +111,7 @@ D: "I just...I can't stop thinking about it." # dad_furious
 == off ==
 "No...oh no...this isn't happening." # dad_crying
 "I'm sorry, son. I think I need some space."
-+ [map] -> Map
+-> back_to_map
 
 == wait ==
 Mom was getting you a birthday gift!
@@ -119,12 +119,12 @@ Mom was getting you a birthday gift!
 -> too_late
 
 == act ==
--> Map
+-> back_to_map
 
 == too_late ==
 Sigh. # dad_crying
 "I don't know, son. I think I need some space."
-+ [map] -> Map
+-> back_to_map
 
 
 
@@ -149,11 +149,11 @@ Sigh. # dad_crying
 
 == what_surprise ==
 "Just wait till you see! It's big, it's rare, your dad's gonna love it. My my, sometimes I'm such a good gifter I impress myself." # mom_happy
-+ [map] -> Map
+-> back_to_map
 
 == skateboard ==
 "Honey...no one will like you if you talk that way. Anyways, it's not your birthday. Now run along... " # mom_plain
-+ [map] -> Map
+-> back_to_map
 
 == sneak ==
 "Oh honey, you've got it all wrong. It's not that."
@@ -183,11 +183,11 @@ Sigh. # dad_crying
 
 == expensive ==
 Oh, I had to sell his favorite original First Edition Mrs Pac Man to pay for it. You don't think he'll be upset, do you? # mom_worried
-+ [...] -> Map
++ [...] -> back_to_map
 
 == thoughtful ==
 "I know, honey. Sometimes I impress myself." # mom_happy
-+ [map] -> Map
+-> back_to_map
 
 == affair ==
 "HA! Me, an affair? A woman my age, honey you flatter me." # mom_happy
@@ -196,14 +196,32 @@ Oh, I had to sell his favorite original First Edition Mrs Pac Man to pay for it.
 
 == win ==
 "HA! Your dad's such a sensitive soul. All these crazy ideas. Let me go talk to him, it'll clear it all up. Now you go change into your birthday suit." # mom_happy
-+ [That's not what that word means, Mom.] -> END
-+ [...you're welcome for saving this family, everyone.] -> END
++ [That's not what that word means, Mom.] -> credits
++ [...you're welcome for saving this family, everyone.] -> credits
 
 
+== credits == 
+
+Thank you for playing! You won!
+
+Credits:
+Souren Papazian
+Malte Skarupke
+Cissy Yu
+Zhijing Kuang
+Fran Morojo
+Matthew Zhang
+-> END
 
 
+== back_to_map ==
++ {Map < 3 }[Back to map] -> Map
++ {Map >= 3} -> done
 
 
 ==done==
-GAME OVER
+GAME OVER # dad_crying
+
+Try again to repair this situation?
+
 ->END
