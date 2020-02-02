@@ -74,9 +74,9 @@ D: "It's a vintage arcade machine! We've been planning in secret for weeks." # d
 ~dad_score++
 ...dad is scrubbing dishes...
 Is there a tension in the room?... # dad_worried
-+ ["Dad, is everything okay?"] -> ok
-+ {Deak == 1} ["I just ran into Deak outside."] -> asshole
-+ {Mom == 0} ["Dad...where's mom?"] -> wheres_mom
++ [Dad, is everything okay?] -> ok
++ {Deak == 1} [I just ran into Deak outside.] -> asshole
++ {Mom == 0} [Dad...where's mom?] -> wheres_mom
 + [Happy Birthday!] -> asshole
 
 == wheres_mom ==
@@ -95,8 +95,8 @@ SMASH!!! # dad_angry
    Dad...
    Are you okay?
      "I'm fine! I dropped a dish. I'm fine..."
-        + ["Dad, what's wrong?"] -> crying
-        + ["Get your act together, Dad."] -> act
+        + [Dad, what's wrong?] -> crying
+        + [Get your act together, Dad.] -> act
 
 == crying ==
 D: "I just...I can't stop thinking about it." # dad_furious
