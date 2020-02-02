@@ -215,6 +215,7 @@ Matthew Zhang
 
 
 == back_to_map ==
+# empty_picture
 + {Map < 3 }[Back to map] -> Map
 + {Map >= 3} [You've spoken to everyone. Did you win?] -> done
 
