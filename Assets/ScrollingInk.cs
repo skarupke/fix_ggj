@@ -5,9 +5,11 @@ using Ink.Runtime;
 using System.Collections.Generic;
 using UnityEngine.Events;
 
+
 // This is a super bare bones example of how to play and display a ink story in Unity.
 public class ScrollingInk : MonoBehaviour
 {
+    public Sprite dad_happy;
     public static event Action<Story> OnCreateStory;
 
     void Awake()
@@ -23,6 +25,13 @@ public class ScrollingInk : MonoBehaviour
         story = new Story(inkJSONAsset.text);
         if (OnCreateStory != null) OnCreateStory(story);
         RefreshView();
+    }
+
+    void UpdateFace(string tag)
+    {
+
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/" + tag) as Sprite;
+        // gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/dad_happy") as Sprite;
     }
 
     // This is the main function called every time the story changes. It does a few things:
@@ -42,6 +51,17 @@ public class ScrollingInk : MonoBehaviour
             text = text.Trim();
             // Display the text on screen!
             AppendText(text);
+            // Update face to match choice!
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            List<string> tags = story.currentTags;
+            if (tags.Count == 1)
+            {
+                UpdateFace(tags[0]);
+            }
+            else
+            {
+                Debug.Log("Not updating face because tag count is " + tags.Count);
+            }
         }
 
         // Display all the choices, if there are any!
@@ -84,6 +104,7 @@ public class ScrollingInk : MonoBehaviour
                     DeakButton.gameObject.SetActive(true);
                     map.SetActive(true);
                     ClearText();
+                    ClearFace();
                 }
                 else if (text == "Dad")
                 {
@@ -92,6 +113,7 @@ public class ScrollingInk : MonoBehaviour
                     DadButton.gameObject.SetActive(true);
                     map.SetActive(true);
                     ClearText();
+                    ClearFace();
                 }
                 else if (text == "Mom")
                 {
@@ -100,6 +122,7 @@ public class ScrollingInk : MonoBehaviour
                     MomButton.gameObject.SetActive(true);
                     map.SetActive(true);
                     ClearText();
+                    ClearFace();
                 }
                 else
                     button = CreateChoiceView(text);
@@ -111,7 +134,8 @@ public class ScrollingInk : MonoBehaviour
         else
         {
             Button choice = CreateChoiceView("Game Over.\nRestart?");
-            choice.onClick.AddListener(delegate {
+            choice.onClick.AddListener(delegate
+            {
                 ClearText();
                 StartStory();
             });
@@ -170,6 +194,11 @@ public class ScrollingInk : MonoBehaviour
         textPrefab.text += '\n' + text;
     }
 
+    void ClearFace()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
     // Creates a button showing the choice text
     Button CreateChoiceView(string text)
     {
@@ -189,7 +218,7 @@ public class ScrollingInk : MonoBehaviour
     // Destroys all the children of this gameobject (all the UI)
     void RemoveChildren()
     {
-        foreach(Button b in added_buttons)
+        foreach (Button b in added_buttons)
         {
             GameObject.Destroy(b.gameObject);
         }
@@ -227,6 +256,9 @@ public class ScrollingInk : MonoBehaviour
     [SerializeField]
     private ScrollRect scrollRect;
 
+    [SerializeField]
+    private Sprite Face;
+
     private List<Button> added_buttons = new List<Button>();
 
     private float old_scroll_position = 0.0f;
@@ -234,7 +266,7 @@ public class ScrollingInk : MonoBehaviour
     int num_scroll_steps = 0;
 }
 
-     
+
 public static class UIX
 {
     /// <summary>
