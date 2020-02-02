@@ -53,6 +53,9 @@ public class ScrollingInk : MonoBehaviour
             AppendText(text);
             // Update face to match choice!
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            // Show background
+            Background.enabled = true;
+            // Get face tag
             List<string> tags = story.currentTags;
             if (tags.Count == 1)
             {
@@ -105,6 +108,7 @@ public class ScrollingInk : MonoBehaviour
                     map.SetActive(true);
                     ClearText();
                     ClearFace();
+                    ClearBackground();
                 }
                 else if (text == "Dad")
                 {
@@ -199,6 +203,11 @@ public class ScrollingInk : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
+    void ClearBackground()
+    {
+        Background.enabled = false;
+    }
+
     // Creates a button showing the choice text
     Button CreateChoiceView(string text)
     {
@@ -257,7 +266,7 @@ public class ScrollingInk : MonoBehaviour
     private ScrollRect scrollRect;
 
     [SerializeField]
-    private Sprite Face;
+    private SpriteRenderer Background;
 
     private List<Button> added_buttons = new List<Button>();
 
