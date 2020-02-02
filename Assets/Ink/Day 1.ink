@@ -216,7 +216,7 @@ Matthew Zhang
 
 == back_to_map ==
 + {Map < 3 }[Back to map] -> Map
-+ {Map >= 3} -> done
++ {Map >= 3} [You've spoken to everyone. Did you win?] -> done
 
 
 ==done==
