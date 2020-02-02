@@ -9,7 +9,7 @@ VAR dad_score = 0
 -> Mom
 * [Dad] # dad
 -> Dad
-* {Map >= 3} -> done
++ {Map >= 3} -> did_you_win
 
 
 
@@ -215,10 +215,11 @@ Matthew Zhang
 
 
 == back_to_map ==
-# empty_picture
-+ {Map < 3 }[Back to map] -> Map
-+ {Map >= 3} [You've spoken to everyone. Did you win?] -> done
++ [Back to map] -> Map
 
+== did_you_win ==
+# empty_picture
++ [You've spoken to everyone. Did you win?] -> done
 
 ==done==
 GAME OVER # dad_crying
