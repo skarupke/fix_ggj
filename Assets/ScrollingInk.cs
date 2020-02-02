@@ -83,6 +83,7 @@ public class ScrollingInk : MonoBehaviour
                     button = DeakButton;
                     DeakButton.gameObject.SetActive(true);
                     map.SetActive(true);
+                    ClearText();
                 }
                 else if (text == "Dad")
                 {
@@ -90,6 +91,7 @@ public class ScrollingInk : MonoBehaviour
                     button = DadButton;
                     DadButton.gameObject.SetActive(true);
                     map.SetActive(true);
+                    ClearText();
                 }
                 else if (text == "Mom")
                 {
@@ -97,6 +99,7 @@ public class ScrollingInk : MonoBehaviour
                     button = MomButton;
                     MomButton.gameObject.SetActive(true);
                     map.SetActive(true);
+                    ClearText();
                 }
                 else
                     button = CreateChoiceView(text);
@@ -107,9 +110,9 @@ public class ScrollingInk : MonoBehaviour
         // If we've read all the content and there's no choices, the story is finished!
         else
         {
-            Button choice = CreateChoiceView("End of story.\nRestart?");
+            Button choice = CreateChoiceView("Game Over.\nRestart?");
             choice.onClick.AddListener(delegate {
-                textPrefab.text = "";
+                ClearText();
                 StartStory();
             });
         }
@@ -124,6 +127,11 @@ public class ScrollingInk : MonoBehaviour
             new_scroll_position = 1.0f - (down / height);
             num_scroll_steps = 60;
             //scrollRect.verticalNormalizedPosition = 1.0f - (down / height);
+        }
+        else
+        {
+            old_scroll_position = new_scroll_position = 0.0f;
+            num_scroll_steps = 0;
         }
     }
 
@@ -148,7 +156,13 @@ public class ScrollingInk : MonoBehaviour
     void AppendLine()
     {
         if (textPrefab.text.Length > 1)
-            textPrefab.text += "\n___________________________________\n";
+            textPrefab.text += "\n_____________________________\n";
+    }
+
+    void ClearText()
+    {
+        textPrefab.text = "";
+        scrollRect.verticalNormalizedPosition = 1.0f;
     }
 
     void AppendText(string text)

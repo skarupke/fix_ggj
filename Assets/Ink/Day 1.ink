@@ -9,7 +9,7 @@ VAR dad_score = 0
 -> Mom
 * [Dad] # dad
 -> Dad
-* [END GAME] -> done
+* {Map == 3} -> done
 
 
 
@@ -206,5 +206,4 @@ Oh, I had to sell his favorite original First Edition Mrs Pac Man to pay for it.
 
 ==done==
 GAME OVER
-+ [RESET] -> Map
-+ [END GAME] ->END
+->END
