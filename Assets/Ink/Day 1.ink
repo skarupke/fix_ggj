@@ -202,14 +202,14 @@ Oh, I had to sell his favorite original First Edition Mrs Pac Man to pay for it.
 
 == credits == 
 
-Thank you for playing! You won!
+Thank you for playing! You won! # dad_mom_happy
 
 Credits:
 Souren Papazian
 Malte Skarupke
 Cissy Yu
 Zhijing Kuang
-Fran Morojo
+Francisco Rojo
 Matthew Zhang
 -> END
 
